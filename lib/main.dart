@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_final/screens/tela_inicial.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -18,4 +20,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

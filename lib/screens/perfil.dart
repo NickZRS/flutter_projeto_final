@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'tela_cadastro.dart';
 
 class TelaPerfil extends StatelessWidget {
   final String email;
-  //final String email;
 
   const TelaPerfil({super.key, required this.email});
 
@@ -23,20 +23,12 @@ class TelaPerfil extends StatelessWidget {
           ),
         ],
       ),
-
-
-
-
-
-
-
       body: Stack(
         children: [
-
           Align(
             alignment: const Alignment(0.0, -0.6),
             child: Text(
-              'Seja bem-vindo\n$email',
+              'Seja bem-vindo\n',
               style: TextStyle(
                 fontSize: 30,
                 color: const Color.fromRGBO(64, 75, 224, 0.973),
@@ -48,21 +40,25 @@ class TelaPerfil extends StatelessWidget {
                       blurRadius: 15),
                 ],
               ),
+              textAlign: TextAlign.center,
             ),
           ),
-          const Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Você está logado!",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color.fromARGB(204, 0, 0, 1),
-                    fontWeight: FontWeight.bold,
+          const Positioned.fill(
+            child: Align(
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Você está logado!",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Color.fromARGB(204, 0, 0, 1),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

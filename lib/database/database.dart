@@ -22,18 +22,18 @@ class DatabaseHelper {
       join(await getDatabasesPath(), 'user_database.db'),
       onCreate: (db, version) {
         return db.execute(
-          "CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT)",
+          "CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT,nome TEXT, idade TEXT,sexo TEXT , email TEXT, password TEXT)",
         );
       },
       version: 1,
     );
   }
 
-  Future<void> insertUser(String email, String password) async {
+  Future<void> insertUser(String nome, String idade, String sexo, String email, String password) async {
     final db = await database;
     await db!.insert(
       'users',
-      {'email': email, 'password': password},
+      {'nome': nome,'idade': idade,'sexo': sexo ,'email': email, 'password': password},
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
@@ -49,10 +49,5 @@ class DatabaseHelper {
       return users.first;
     }
     return null;
-  }
-
-  Future<List<Map<String, dynamic>>> getAllUsers() async {
-    final db = await database;
-    return await db!.query('users');
   }
 }

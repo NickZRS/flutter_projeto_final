@@ -1,25 +1,21 @@
-
 import 'package:flutter_app_final/database/database.dart';
 import 'package:flutter_app_final/screens/perfil.dart';
-import 'package:flutter/foundation.dart';
+import 'tela_cadastro.dart';
 import 'package:flutter/material.dart';
-
 
 class TelaLogin extends StatefulWidget {
   const TelaLogin({super.key});
 
   @override
-  loginScreenState createState() => loginScreenState();
+  LoginScreenState createState() => LoginScreenState();
+}
 
-  }
-
-
-  class loginScreenState extends State<TelaLogin> {
+// ignore: camel_case_types
+class LoginScreenState extends State<TelaLogin> {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final databaseHelper = DatabaseHelper();
-
 
   void login() async {
     if (formKey.currentState!.validate()) {
@@ -28,25 +24,23 @@ class TelaLogin extends StatefulWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => TelaPerfil(email: emailController.text),
+            builder: (context) => TelaPerfil(email: emailController.text, nome: nomeController.text,),
           ),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Invalid Email or Password')),
+          const SnackBar(content: Text('E-mail ou senha inválida.')),
         );
       }
     }
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tela de Login'),
-        backgroundColor:
-            const Color.fromRGBO(169, 209, 231, 8), // Cor diferente na navbar
+        backgroundColor: const Color.fromRGBO(169, 209, 231, 8),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -127,19 +121,13 @@ class TelaLogin extends StatefulWidget {
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        const SizedBox(
-                            width:
-                                20), //configuração para espaçamento usando .center
+                        const SizedBox(width: 20),
                         ElevatedButton(
                           onPressed: login,
                           child: const Text('Login'),
                         ),
-                        const SizedBox(
-                            width:
-                                20), //configuração para espaçamento usando .center
-                        
+                        const SizedBox(width: 20),
                       ],
                     ),
                   ],
@@ -152,5 +140,3 @@ class TelaLogin extends StatefulWidget {
     );
   }
 }
-
-

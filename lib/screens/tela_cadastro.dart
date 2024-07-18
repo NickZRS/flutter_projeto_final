@@ -1,19 +1,19 @@
-
 import 'package:flutter_app_final/database/database.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 
 class TelaCadastro extends StatefulWidget {
   const TelaCadastro({super.key});
 
   @override
-  registerScreenState createState() => registerScreenState();
+  RegisterScreenState createState() => RegisterScreenState();
+}
 
-  }
-
-  class registerScreenState extends State<TelaCadastro> {
+// ignore: camel_case_types
+class RegisterScreenState extends State<TelaCadastro> {
   final formKey = GlobalKey<FormState>();
+  final nomeController = TextEditingController();
+  final idadeController = TextEditingController();
+  final sexoController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final databaseHelper = DatabaseHelper();
@@ -21,6 +21,9 @@ class TelaCadastro extends StatefulWidget {
   void register() async {
     if (formKey.currentState!.validate()) {
       await databaseHelper.insertUser(
+        nomeController.text,
+        idadeController.text,
+        sexoController.text,
         emailController.text,
         passwordController.text,
       );
@@ -35,8 +38,7 @@ class TelaCadastro extends StatefulWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tela de Cadastro'),
-        backgroundColor:
-            const Color.fromRGBO(169, 209, 231, 8), // Cor diferente na navbar
+        backgroundColor: const Color.fromRGBO(169, 209, 231, 8),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -48,6 +50,96 @@ class TelaCadastro extends StatefulWidget {
                 key: formKey,
                 child: Column(
                   children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: TextFormField(
+                        controller: nomeController,
+                        decoration: InputDecoration(
+                          labelText: 'Nome',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Por favor digite o seu nome';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: TextFormField(
+                        controller: idadeController,
+                        decoration: InputDecoration(
+                          labelText: 'Idade',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Por favor digite sua idade';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: TextFormField(
+                        controller: sexoController,
+                        decoration: InputDecoration(
+                          labelText: 'Sexo',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Por favor digite seu sexo';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 10),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -117,19 +209,13 @@ class TelaCadastro extends StatefulWidget {
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        const SizedBox(
-                            width:
-                                20), //configuração para espaçamento usando .center
+                        const SizedBox(width: 20),
                         ElevatedButton(
                           onPressed: register,
                           child: const Text('Cadastrar'),
                         ),
-                        const SizedBox(
-                            width:
-                                20), //configuração para espaçamento usando .center
-                        
+                        const SizedBox(width: 20),
                       ],
                     ),
                   ],
@@ -142,5 +228,3 @@ class TelaCadastro extends StatefulWidget {
     );
   }
 }
-
-
