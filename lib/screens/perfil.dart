@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'tela_cadastro.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_app_final/database/database.dart';
+import 'package:flutter_app_final/screens/calculadora.dart';
+import 'package:flutter_app_final/screens/imc.dart';
 
 class TelaPerfil extends StatelessWidget {
-  final String email;
+  final User user;
 
-  const TelaPerfil({super.key, required this.email});
+  const TelaPerfil({super.key, required this.user});
 
   void logout(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -14,7 +17,7 @@ class TelaPerfil extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bem-vindo'),
+        title: Text(user.nome),
         backgroundColor: const Color.fromRGBO(169, 209, 231, 8),
         actions: [
           IconButton(
@@ -23,46 +26,16 @@ class TelaPerfil extends StatelessWidget {
           ),
         ],
       ),
-      body: Stack(
-        children: [
-          Align(
-            alignment: const Alignment(0.0, -0.6),
-            child: Text(
-              'Seja bem-vindo\n',
-              style: TextStyle(
-                fontSize: 30,
-                color: const Color.fromRGBO(64, 75, 224, 0.973),
-                fontWeight: FontWeight.bold,
-                shadows: [
-                  Shadow(
-                      color: Colors.black.withOpacity(0.3),
-                      offset: const Offset(5, 5),
-                      blurRadius: 15),
-                ],
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const Positioned.fill(
-            child: Align(
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Você está logado!",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Color.fromARGB(204, 0, 0, 1),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+      body:
+          Column(mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          ElevatedButton(onPressed:() {Navigator.push(context,
+              MaterialPageRoute(builder: (context) => TelaIMC()));}, child: Text('Calcule seu IMC')),
+          const SizedBox(height: 100),
+          ElevatedButton(onPressed:() {Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const TelaCalc()));}, child: Text('Calculadora')),
+          ]
+          )
+      );
   }
 }

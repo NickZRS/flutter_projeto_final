@@ -1,6 +1,5 @@
 import 'package:flutter_app_final/database/database.dart';
 import 'package:flutter_app_final/screens/perfil.dart';
-import 'tela_cadastro.dart';
 import 'package:flutter/material.dart';
 
 class TelaLogin extends StatefulWidget {
@@ -19,12 +18,14 @@ class LoginScreenState extends State<TelaLogin> {
 
   void login() async {
     if (formKey.currentState!.validate()) {
-      final user = await databaseHelper.getUser(emailController.text);
-      if (user != null && user['password'] == passwordController.text) {
+      final userMap = await databaseHelper.getUser(emailController.text);
+      if (userMap != null && userMap['password'] == passwordController.text) {
+        final user = User.fromMap(userMap);
+
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => TelaPerfil(email: emailController.text, nome: nomeController.text,),
+            builder: (context) => TelaPerfil(user: user),
           ),
         );
       } else {

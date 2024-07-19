@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_final/screens/tela_cadastro.dart';
 import 'package:flutter_app_final/screens/tela_login.dart';
 
-class TelaInicial extends StatelessWidget {
-  const TelaInicial({super.key});
+class TelaCalc extends StatelessWidget {
+  const TelaCalc({super.key});
 
   @override
   Widget build(BuildContext context) {

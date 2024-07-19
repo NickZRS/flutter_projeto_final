@@ -51,3 +51,29 @@ class DatabaseHelper {
     return null;
   }
 }
+
+class User {
+  
+  final String nome;
+  final String idade;
+  final String sexo;
+
+
+  User({required this.nome, required this.idade, required this.sexo});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'nome': nome,
+      'idade': idade,
+      'sexo': sexo,
+    };
+  }
+
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
+      nome: map['nome'],
+      idade: map['idade'],
+      sexo: map['sexo'],
+    );
+  }
+}
